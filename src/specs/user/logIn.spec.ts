@@ -3,8 +3,8 @@ import {getUser} from "../../data/user"
 import {signUp, signUp2, logIn} from "../../data/helpers";
 const request = supertest("localhost:8001/api/v1")
 
-describe('POSITIVE TESTING', () => {
-    describe('LOGIN', () => {
+describe('LOGIN', () => {
+    describe('POSITIVE TESTING', () => {
         let userImport = getUser();
 
         it('login user', async() => {
@@ -66,8 +66,17 @@ describe('POSITIVE TESTING', () => {
                     console.log(err)
                 })
         })
-
-
-
+        it("login user option 5 using .end with Promise", (done) => {
+            signUp2(userImport).end((err, res)=>{
+                if(err) return done(err);
+                expect(res.body.status).toBe('success')
+                done();
+            })
         })
+        })
+
+    describe('NEGATIVE TESTING', () => {
+        it('Should not create user with existing email', async () => {})
+
+    })
     })

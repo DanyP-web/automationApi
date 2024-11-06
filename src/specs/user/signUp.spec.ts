@@ -20,7 +20,7 @@ describe('USER SIGNUP', () => {
             const res = await request.post("/users/signup")
                 .send(user).expect(201)
             expect(res.body.data.user.name).toBe("Dany")
-            expect(res.body.data.user.email).toBe("dany2@gmail.com")
+            expect(res.body.data.user.email).toBe("dany9@gmail.com")
             expect(res.body.data.status).toBe("success")
             console.log(res.body, 'res');
         })
@@ -93,7 +93,7 @@ describe('USER SIGNUP', () => {
             console.log(res.body, 'res');
         })
 
-        it.only('Should not create user without matching password', async () => {
+        it('Should not create user without matching password', async () => {
             const res = await request.post("/users/signup")
                 .send({
                     "name": "Dany",
