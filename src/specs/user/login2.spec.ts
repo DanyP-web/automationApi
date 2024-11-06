@@ -11,7 +11,7 @@ describe('POSITIVE TESTING', () => {
             await signUp(userImport)
         })
 
-        it.skip('login user', async() => {
+        it.only('login user', async() => {
         await logIn({
             email: userImport.email,
             password: userImport.password,
@@ -23,7 +23,7 @@ describe('POSITIVE TESTING', () => {
             })
 
         })
-        it.only('login user', async() => {
+        it('login user', async() => {
            let resLogin = await logIn({
                 email: userImport.email,
                 password: userImport.password,
