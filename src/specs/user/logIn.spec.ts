@@ -28,9 +28,9 @@ describe('LOGIN', () => {
             await logIn({
                 email: userImport.email,
                 password: userImport.password,
-            }).then(el2=> {
-                expect(el2.body.status).toBe('success')
-                console.log(el2.body)
+            }).then(el=> {
+                expect(el.body.status).toBe('success')
+                console.log(el.body)// is el response?
             })
         })
         it('login user option 3 using try and catch', async() => {
@@ -68,13 +68,13 @@ describe('LOGIN', () => {
                     console.log(err)
                 })
         })
-        it.only("login user option 5 using .end with Promise", (done) => {
+        it("login user option 5 using .end with Promise", (done) => {
             //signUp2(userImport)
             signUp2(userImport).end((err, res)=>{
                 if(err) return done(err);
                 expect(res.body.status).toBe('success')
                 console.log(res.body)
-                done();
+                done(); //How to apply hook here?
             })
         })
         })
@@ -87,16 +87,45 @@ describe('LOGIN', () => {
         })
 
         it('get error when trying login without username', async () => {
-
+            await logIn({
+                email: '',
+                password: userImport.password,
+            }).then(el2=> {
+                expect(el2.body.status).toBe('fail')
+                expect(el2.body.message).toBe('Please provide email and password!')
+                console.log(el2.body)
+            })
         })
+
+
         it('get error when trying login without password', async () => {
-
+            const logInRes = await logIn({
+                email: userImport.email,
+                password: '',
+            })
+            expect(logInRes.body.status).toBe('fail')
+            expect(logInRes.body.message).toBe('Please provide email and password!')
+            console.log(logInRes.body)
         })
-        it('get error when trying login with wrong username', async () => {
 
+
+        it.only('get error when trying login with wrong username', async () => {
+            const logInRes = await logIn({
+                email: 'userImport.email',
+                password: userImport.password,
+            })
+            expect(logInRes.body.status).toBe('fail')
+            expect(logInRes.body.message).toBe('Incorrect email or password')
+            console.log(logInRes.body) // Why would test be passed this way?
         })
         it('get error when trying login with wrong password', async () => {
-
+            const logInRes = await logIn({
+                email: userImport.email,
+                password: 'userImport.password',
+            })
+            // expect(logInRes.body.status).toBe('fail')
+            // expect(logInRes.body.message).toBe('Incorrect email or password')
+            console.log(logInRes.body)
         })
 
     })

@@ -28,7 +28,6 @@ describe('POSITIVE TESTING', () => {
                 email: userImport.email,
                 password: userImport.password,
             })
-
                     console.log(resLogin)
                     expect(resLogin.body.status).toBe('success')
                     expect(resLogin.body.data.user.role).toBe('user')
