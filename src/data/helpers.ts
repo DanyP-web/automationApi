@@ -38,6 +38,10 @@ export async function logIn (user: string | object | undefined) {
     return await request.post("/users/login").send(user)
 }
 
+export function logIn2 (user: string | object | undefined) {
+    return request.post("/users/login").send(user)
+}
+
 
 
 

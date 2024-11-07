@@ -1,6 +1,6 @@
 import * as supertest from 'supertest';
 import {getUser} from "../../data/user"
-import {signUp, signUp2, logIn} from "../../data/helpers";
+import {signUp, signUp2, logIn, logIn2} from "../../data/helpers";
 const request = supertest("localhost:8001/api/v1")
 
 describe('LOGIN', () => {
@@ -55,7 +55,7 @@ describe('LOGIN', () => {
             // signUp(userImport)
             //     .then((res)=>{
             //         expect(res.body.status).toBe('success')
-                    return logIn({
+                       return logIn({
                         email: userImport.email,
                         password: userImport.password,
                     })
@@ -70,7 +70,8 @@ describe('LOGIN', () => {
         })
         it("login user option 5 using .end with Promise", (done) => {
             //signUp2(userImport)
-            signUp2(userImport).end((err, res)=>{
+            logIn2(userImport)
+                .end((err, res)=>{
                 if(err) return done(err);
                 expect(res.body.status).toBe('success')
                 console.log(res.body)
@@ -90,10 +91,10 @@ describe('LOGIN', () => {
             await logIn({
                 email: '',
                 password: userImport.password,
-            }).then(el2=> {
-                expect(el2.body.status).toBe('fail')
-                expect(el2.body.message).toBe('Please provide email and password!')
-                console.log(el2.body)
+            }).then(el=> {
+                expect(el.body.status).toBe('fail')
+                expect(el.body.message).toBe('Please provide email and password!')
+                console.log(el.body)
             })
         })
 
@@ -109,14 +110,14 @@ describe('LOGIN', () => {
         })
 
 
-        it.only('get error when trying login with wrong username', async () => {
+        it('get error when trying login with wrong username', async () => {
             const logInRes = await logIn({
                 email: 'userImport.email',
                 password: userImport.password,
             })
             expect(logInRes.body.status).toBe('fail')
             expect(logInRes.body.message).toBe('Incorrect email or password')
-            console.log(logInRes.body) // Why would test be passed this way?
+            console.log(logInRes.body)
         })
         it('get error when trying login with wrong password', async () => {
             const logInRes = await logIn({
@@ -125,7 +126,7 @@ describe('LOGIN', () => {
             })
             // expect(logInRes.body.status).toBe('fail')
             // expect(logInRes.body.message).toBe('Incorrect email or password')
-            console.log(logInRes.body)
+            console.log(logInRes.body) // Why would test pass this way?
         })
 
     })

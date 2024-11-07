@@ -11,7 +11,7 @@ export const user: User = {
 }
 
 export function getUser():User {
-    const raandomUser = createRandomUser();
+    const randomUser = createRandomUser();
     let password = faker.internet.password();
     return {
         "name": faker.internet.userName(),
