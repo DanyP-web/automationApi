@@ -51,23 +51,22 @@ describe('LOGIN', () => {
                 //throw Error(error)
             }
         })
-        it('login user option 4 using then', async() => {
-            // signUp(userImport)
-            //     .then((res)=>{
-            //         expect(res.body.status).toBe('success')
-                       return logIn({
+        it("login user option 4 using then", () => {
+            return signUp(userImport)
+                .then((res) => {
+                    expect(res.body.status).toBe("success");
+                    return logIn({
                         email: userImport.email,
                         password: userImport.password,
-                    })
-            //     })
-                .then((res2)=>{
-                    expect(res2.statusCode).toBe(200)
-                    console.log(res2.body)
+                    });
                 })
-                .catch(err=>{
-                    console.log(err)
+                .then((res2) => {
+                    expect(res2.statusCode).toBe(201); // This line will fail if statusCode is not 201
                 })
-        })
+                .catch((err) => {
+                    throw new Error(`Test failed due to unexpected response: ${err}`);
+                });
+        });
         it("login user option 5 using .end with Promise", (done) => {
             //signUp2(userImport)
             logIn2(userImport)
