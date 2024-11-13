@@ -5,7 +5,7 @@ const request = supertest("localhost:8001/api/v1")
 
 describe('LOGIN', () => {
     describe('POSITIVE TESTING', () => {
-        let userImport = getUser();
+        let userImport = getUser('user');
         beforeEach(async() => {
             await signUp(userImport)
         })
@@ -81,7 +81,7 @@ describe('LOGIN', () => {
 
     describe('NEGATIVE TESTING', () => {
 
-        let userImport = getUser();
+        let userImport = getUser('user');
         beforeEach(async() => {
             await signUp(userImport)
         })

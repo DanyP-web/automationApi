@@ -35,7 +35,7 @@ describe('USER SIGNUP', () => {
             //expect(res.body.data.status).toBe("success")
         })
 
-        it('Create a new user using faker', function (done) {
+        it('Create a new user using faker2', function (done) {
             let userImport = getUser()
             const res = request
                 .post("/users/signup")

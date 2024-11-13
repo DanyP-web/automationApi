@@ -10,7 +10,7 @@ export const user: User = {
     "passwordConfirm": password,
 }
 
-export function getUser():User {
+export function getUser(role:string):User {
     const randomUser = createRandomUser();
     let password = faker.internet.password();
     return {
@@ -18,6 +18,7 @@ export function getUser():User {
         "email": faker.internet.email(),
         "password": password,
         "passwordConfirm": password,
+        "role": role
     }
 }
 
