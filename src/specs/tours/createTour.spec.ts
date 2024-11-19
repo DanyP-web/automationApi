@@ -99,7 +99,7 @@ describe('TOURS', () => {
 })
 describe('NEGATIVE TESTING', () => {
 
-    it.only('should not create tour with incorrect role', async () => {
+    it('should not create tour with incorrect role', async () => {
         let userImport = getUser("user");
         let tourImport = await tour()
         const res = await signUp(userImport)
@@ -116,7 +116,7 @@ describe('NEGATIVE TESTING', () => {
                 expect(el.body.message).toEqual('You do not have permission to perform this action')
             })
     })
-        it('cannot create tour without required fields', async () => {
+        it.only('cannot create tour without required fields', async () => {
             let userImport = getUser("admin");
             let tourImport = await tour()
             const res = await signUp(userImport)
@@ -128,7 +128,7 @@ describe('NEGATIVE TESTING', () => {
                 .set('Cookie', cookie)
                 .send({
                     name: " ",
-                    duration: 10,
+                    duration: -5,
                     description: "Could be",
                     maxGroupSize: 10,
                     summary: "Test tour",
